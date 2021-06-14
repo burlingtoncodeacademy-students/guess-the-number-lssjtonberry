@@ -16,7 +16,8 @@ Game 1
 	*doesn't happen with every run through but can pop up
 -guessed number will sometimes appear in guessed number stack but computer will continue to list more numbers
 	*doesn't happen every playthrough so perhaps its number dependent against CPUthingz
--stepfour doesn't seem to load properly after responding yes to previous question(i.e., was number of guesses correct?) I know its not a problem of the function itself because the scenario loads properly from other areas in the game
+		***more testing needed but until workaround is found, Game 1's been modified to take this list into account(i.e., Is your number in this list? and "Was the amount the 				guesses within the given amount CPU says it'd take to figure out users number.)
+-stepfive doesn't seem to load properly after responding yes to previous question from four. I know its not a problem of the function itself because the scenario loads properly from other areas in the game
 	leading me to think the problem's within stepfour. It's a not game-breaking issue thankfully. The game is technically over at this point. More  of an inconvenience to the user. 
 	The game closes without giving the user a choice to play again or not. 
 
