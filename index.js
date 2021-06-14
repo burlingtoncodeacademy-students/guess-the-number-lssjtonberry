@@ -48,7 +48,7 @@ async function start() {
     "What's your secret number?\nI won't peek, I promise...\n"
   );
   console.log("You entered: " + secretNumber);
-  //First calculation of users given number vs the random number generated from the first CPU guess. If on the off chance the answers right from the
+  //First calculation of users given number vs the random number generated from the first CPU guess. 
   if (randomNum !== secretNumber) {
     console.log(
       "Darn it! I thought for sure it was like 99.9(cause I bet you're pretty smart like that..) Time for me to get serious."
