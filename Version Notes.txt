@@ -14,7 +14,7 @@ Game 1
 -off by one errors with guessed number
 	*sometimes final guessed number in number stack by computer will be - 1 from guessed
 	*doesn't happen with every run through but can pop up
--guessed number will sometimes appear in guessed number stack but computer will continue to list more numbers
+-guessed number will sometimes appear in guessed number stack but computer will continue to list more numbers. correct guess is supposed to always be the final number in the guess list.
 	*doesn't happen every playthrough so perhaps its number dependent against CPUthingz
 		***more testing needed but until workaround is found, Game 1's been modified to take this list into account(i.e., Is your number in this list? and "Was the amount the 				guesses within the given amount CPU says it'd take to figure out users number.)
 		***number of guesses is supposed to(but likely won't always be considered to) be implied from amount of numbers listed.
