@@ -1,0 +1,26 @@
+Guess-The-Number v1.0!
+(Game 1 v1.0 && Game 2 v1.0)
+
+known issues/bugs
+
+Both Games
+-can't handle negative numbers. number needs to be a positive integer either within the given or supplied number range
+
+
+Game 1
+-modifying number range in order to narrow down guesses
+	*currently game lists all numbers found through guesses all at once when CPUthingz is called.
+	*may be possible to intervene and ask but more testing is needed.
+-off by one errors with guessed number
+	*sometimes final guessed number in number stack by computer will be - 1 from guessed
+	*doesn't happen with every run through but can pop up
+-guessed number will sometimes appear in guessed number stack but computer will continue to list more numbers. correct guess is supposed to always be the final number in the guess list.
+	*doesn't happen every playthrough so perhaps its number dependent against CPUthingz
+		***more testing needed but until workaround is found, Game 1's been modified to take this list into account(i.e., Is your number in this list? and "Was the amount the 				guesses within the given amount CPU says it'd take to figure out users number.)
+		***number of guesses is supposed to(but likely won't always be considered to) be implied from amount of numbers listed.
+-stepfive doesn't seem to load properly after responding yes to previous question from stepfour. I know its not a problem of the function itself because the scenario loads properly from other areas in the game
+	leading me to think the problem's within stepfour. It's a not game-breaking issue thankfully. The game is technically over at this point. More  of an inconvenience to the user. 
+	The game closes without giving the user a choice to play again or not. 
+
+Game 2
+-"Should" be relatively bug-free.

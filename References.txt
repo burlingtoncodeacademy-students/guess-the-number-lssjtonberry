@@ -1,0 +1,5 @@
+https://www.geeksforgeeks.org/binary-search-in-javascript/
+
+-for the assistance in forging and applying the CPUthings algorithm
+
+My teacher Bob, TAs(Olivia was SUPER helpful with this :D) and fellow classmates at BCA
