@@ -27,134 +27,75 @@ async function init() {
 init()}
 }
 
-//The range of possible numbers within the game
-let arr = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
-  42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
-  61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
-  80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98,
-  99, 100,
-];
 
-//Generated random CPU number to use as a first guess
-let randomNum = Math.floor(Math.random() * 100 + 1);
+//Generated random CPU number to use as a first guess as well as any following guesses it would take.
+function randomNum(min, max){
+  return Math.floor(Math.random() * (max - min) + min);}
 //Game 1
 async function start() {
   console.log(
-    "Welcome to the FIRST Number Guessing Game. This is where you (the human) make up a secret number between 1 and 100 that I (the CPU) will work to the FULLEST extent that your personal computer's processing power will ALLOW...\nto guess your number...\nin seven attempts or less."
+    "Welcome to the FIRST Number Guessing Game. This is where you (the human) make up a secret number that I (the CPU) will work to the FULLEST extent that your personal computer's processing power will ALLOW...\nto guess your number...\n"
   );
+  console.log(
+    "First. Let us set some parameters before the game begins.\nI don't wanna make this too easy or too hard on you so I'll let you set the range of numbers that I have to work with."
+  );
+  let min = await ask("What's the lowest number you can think of? ");
+  if (min < 0) {
+    console.log(
+      "Sorry but my programmer wasn't smart enough to let me deal with negative numbers.\nYou can blame him for what I'm about to do "
+    );
+    process.exit();
+  }
+  let max = await ask(
+    "What's the HIGHEST number I can go up to :D?\nYou might not wanna make this too far from your low. You may have a tougher time... "
+  );
+  if (max === min || max < min || max < 0) {
+    console.log("Yeah no that's not gonna work for this game.");
+    process.exit();
+  }
+  console.log(
+    "Thank you very much for your cooperation.\nNow that we got the specifics out of the way... "
+  );
+  
   let secretNumber = await ask(
     "What's your secret number?\nI won't peek, I promise...\n"
   );
   console.log("You entered: " + secretNumber);
-  //First calculation of users given number vs the random number generated from the first CPU guess. 
-  if (randomNum !== secretNumber) {
-    console.log(
-      "Darn it! I thought for sure it was like 99.9(cause I bet you're pretty smart like that..) Time for me to get serious."
+
+
+  guessing(min, max)
+  async function guessing() {
+    let binary = randomNum(min, max)
+    let guessTwo = await ask(
+      `Is your number higher or lower than ${binary}? Or is it a match? `
     );
-  }
-  //Setup for the CPU to start making guesses
-  let x = secretNumber;
-  let advancedCpuThingz = function (arr, x, start, end) {
-    // Base Condition
-    if (start > end) return false;
-    // Find the middle index
-    let mid = Math.floor((start + end) / 2);
-    console.log(mid);
-    // Compare middle with given variable
-    if (arr[mid] === x) return true;
-    // If guess at middle is greater than x,
-    // continue search in the left half of the middle
-    if (arr[mid] > x) return advancedCpuThingz(arr, x, start, mid - 1);
-    // If guess at mid is smaller,
-    // continue search in the right half of mid
-    else return advancedCpuThingz(arr, x, mid + 1, end);
-  };
-
-  //Second phase of game. Should first generated random number guess fail, guessing function will be implemented
-  nextStep();
-  async function nextStep() {
-    console.log("I think I got it now you smarty pants!");
-    let comment = await ask(`It wouldn't happen to be ${randomNum} would it? `);
-
-    if (randomNum === secretNumber) {
-      console.log(
-        `You don't even need to respond. I know it was ${secretNumber}! I...am a legend!`
-      );
-      stepfive();
-    } else if (comment == "yes") {
-      console.log(
-        "Hey man. Cheatin ain't cool and neither are cheaters. Try again when you wanna play fair and square"
-      );
-
-      process.exit();
-    } else {
-      console.log(
-        "Perhaps I underestimated you pal. Time for me to pull out all the stops and figure this out once and for all!!"
-      );
-      let count = 0;
-
-      //Just me trying to be cheeky
-      while (count <= 15) {
-        count += 1;
-        if (count === 1) {
-          console.log("Processing!");
-        } else if (count === 13) {
-          console.log("I think your computer's a bit slow...");
-        } else if (count === 15) console.log("DONE");
-        else {
-          console.log("...");
-        }
-      }
-      advancedCpuThingz(arr, secretNumber, 0, arr.length - 1);
-      console.log(
-        "I think my brain just EXPANDED right now dude! I know the answer is in this list! ;)"
-      );
-      stepThree()
-    }
-  }
-  //Confirmation on whether or not secret number was found from guessing function in amount of tries specified.
+    if (guessTwo === "higher") {
+      min = binary + 1;
   
-  async function stepThree() {
-    let newComment = await ask(`Your number's in this list! Am I right? `);
-    if (
-      (newComment === "yes") ||
-      (newComment === "Yes") ||
-      (newComment === "Yeah") ||
-      (newComment === "yeah")
-    ) {
-      console.log("Amazing!");
-      stepfour()
-    }
-    else if (console.log("Hey now don't be salty. You gave it your best shot. Don't sour it now by trying to cheat.")); {
-  stepfive()}
+      guessing()
+    } else if (guessTwo === "lower") {
+      max = binary - 1;
   
-//Final resolution of the game. Asks user if CPU guessed number in amount of tries it claims it could.
-  stepfour ()
-    async function stepfour() {
-    let newComment4 = await ask(
-      "Did I figure it out in seven or less tries...just like I said I would ;)? "
-    );
-    if (
-      (newComment4 === "yes")
-    ) {
-      console.log(
-        `I think I may be the greatest of all time. I guessed it right! Thanks for playing friend`
-      );
-      stepfive();
-    } else
-      (console.log(
-        "I think someone MIGHT..be trying to cheat here and might ALSO...be a sore loser. Try again next time o.O "));
-    {
-      process.exit();
+      guessing()
     }
-      }
+    else if (guessTwo=== "match") {
+  
+      (console.log(`Hey I did it. Probably didn't take me that long I bet ;)`))
+    stepthree()
+    }
     
+    else {
+      console.log("nice try cheater");
+      process.exit()
+    }
+  
   }
+      
+    }
+  
   //End Game Instructions. Asking user if they'd like to try again or not with options to either return to the "main menu" or try another round of this game
 
-  async function stepfive() {
+  async function stepthree() {
     let newComment2 = await ask("Would you like to try again? ");
     if (
       (newComment2 === "yes")
@@ -171,7 +112,7 @@ async function start() {
       console.log("Bye");;
     }
   }
-}
+
 
 //Officially starting the Reverse Number Guessing Game
 async function start2() {
