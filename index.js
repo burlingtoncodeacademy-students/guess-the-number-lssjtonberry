@@ -36,6 +36,7 @@ async function start() {
   console.log(
     "Welcome to the FIRST Number Guessing Game. This is where you (the human) make up a secret number that I (the CPU) will work to the FULLEST extent that your personal computer's processing power will ALLOW...\nto guess your number...\n"
   );
+//Asking user for specifics prior to the beginning of the game. In this instance...a minimum number and a maximum number
   console.log(
     "First. Let us set some parameters before the game begins.\nI don't wanna make this too easy or too hard on you so I'll let you set the range of numbers that I have to work with."
   );
@@ -56,13 +57,13 @@ async function start() {
   console.log(
     "Thank you very much for your cooperation.\nNow that we got the specifics out of the way... "
   );
-  
+  //Finally asking for their "secret number"
   let secretNumber = await ask(
     "What's your secret number?\nI won't peek, I promise...\n"
   );
   console.log("You entered: " + secretNumber);
 
-
+//New guessing function to take into account modifying guessing range with each attempt.
   guessing(min, max)
   async function guessing() {
     let binary = randomNum(min, max)
@@ -161,8 +162,8 @@ async function start2() {
       start2();
     } else if (tryagain === "no");
     {
-      let tryagain2 = await ask("Care to try something else ");
-      if (tryagain2 === "yes") {
+      let bored = await ask("Care to try something else ");
+      if (bored === "yes") {
         console.log("Sounds good. I'll take you back to the main menu now :D");
         init();
       } else {
